@@ -1,14 +1,25 @@
 package com.springbatch.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Senhas")
 public class Senhas {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private long id;
+	
+	@Column(name = "senha1")
 	private String senha1;
+	
+	@Column(name = "senha2")	
 	private String senha2;
 
 	public Senhas(long id, String senha1, String senha2) {

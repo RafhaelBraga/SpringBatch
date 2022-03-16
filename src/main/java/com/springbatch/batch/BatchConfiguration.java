@@ -7,7 +7,6 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
@@ -49,16 +48,16 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<Senhas> writer(DataSource dataSource) {
       return new JdbcBatchItemWriterBuilder<Senhas>()
         .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-        .sql("INSERT INTO senhas (senha1, senha2) VALUES (:senha1, :senha2)")
+        .sql("UPDATE senhas SET senha2=:senha2 WHERE id=:id")
         .dataSource(dataSource)
         .build();
     }
     
     @Bean
-    public Job ChangeCryptJob(JobRepository repository, Step step1) {
+    public Job ChangeCryptJob(JobCompletionNotificationListener listener, Step step1) {
     	
       return jobBuilderFactory.get("ChangeCryptJob")
-        .repository(repository)
+    	.listener(listener)
         .start(step1)
         .build();
       
