@@ -1,6 +1,5 @@
 package com.springbatch.batch;
 
-import org.springframework.batch.item.ItemReader;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
@@ -8,7 +7,8 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
@@ -55,22 +55,20 @@ public class BatchConfiguration {
     }
     
     @Bean
-    public Job ChangeCryptJob(JobCompletionNotificationListener listener, Step step1) {
+    public Job ChangeCryptJob(JobRepository repository, Step step1) {
     	
       return jobBuilderFactory.get("ChangeCryptJob")
-        .incrementer(new RunIdIncrementer())
-        .listener(listener)
-        .flow(step1)
-        .end()
+        .repository(repository)
+        .start(step1)
         .build();
       
     }
 
     @Bean
-    public Step step1(JdbcBatchItemWriter<Senhas> writer) {
+    public Step step1(JdbcBatchItemWriter<Senhas> writer, ItemReader<Senhas> reader) {
       return stepBuilderFactory.get("step1")
         .<Senhas, Senhas> chunk(10)
-        .reader(reader())
+        .reader(reader)
         .processor(processor())
         .writer(writer)
         .build();
