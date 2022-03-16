@@ -17,6 +17,6 @@
 
 ## Installation
 
-Requires [java 8] to run.
+Requires java 8 to run.
 
 Right click -> Run as... -> Spring Boot App.
