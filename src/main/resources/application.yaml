@@ -1,0 +1,19 @@
+# server
+server:
+  port: 8081
+
+# datasource
+spring:    
+# h2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console   
+
+  datasource:
+    url: jdbc:h2:mem:batchdb
+    driverClassName: org.h2.Driver
+    username: root
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
