@@ -8,7 +8,7 @@
 
 -  :lock: Schedule a batch to encode data from field "senha1" to "senha2" (Table senhas).
 -  :lock: Schedule a batch to encode data from field "cpf" to "cpf" (Table pessoas).
-- :page_facing_up: List all passwords
+- :page_facing_up: List all passwords.
 
 ## Tech
 
@@ -25,3 +25,15 @@ Change the profile on application.yaml
  - `pessoas`: Run on table pessoas.
 
 Right click -> Run as... -> Spring Boot App.
+
+## Authors
+
+<a href="https://br.linkedin.com/in/rafhael-braga" alt="linkedin" target="_blank">
+
+<img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white">
+
+</a> 
+
+Rafhael Menezes Braga – rafhaelmbraga@gmail.com
+
+[https://github.com/RafhaelBraga/](https://github.com/RafhaelBraga/)
