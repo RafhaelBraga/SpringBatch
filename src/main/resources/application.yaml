@@ -3,7 +3,11 @@ server:
   port: 8081
 
 # datasource
-spring:    
+spring:   
+
+# profile 
+  profiles:
+    active: pessoas 
 # h2
   h2:
     console:

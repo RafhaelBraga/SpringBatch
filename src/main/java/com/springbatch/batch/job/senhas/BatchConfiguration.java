@@ -1,4 +1,4 @@
-package com.springbatch.batch;
+package com.springbatch.batch.job.senhas;
 
 import javax.sql.DataSource;
 
@@ -15,12 +15,14 @@ import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuild
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import com.springbatch.entity.Senhas;
 
 @Configuration
 @EnableBatchProcessing
+@Profile("senhas")
 public class BatchConfiguration {
 
     @Autowired
