@@ -1,5 +1,5 @@
 <h1 align="center">
- Batch - Password Encoding
+ Batch - Data Encoding
   
 ![batch](https://user-images.githubusercontent.com/49730865/158678171-36aa85f6-a9c6-4a51-8f57-0e2f49ac71ab.png)
 </h1>
