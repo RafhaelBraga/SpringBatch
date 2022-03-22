@@ -6,7 +6,8 @@
 
 ## Features
 
--  :lock: Schedule a batch to encode password from field "Senha1" to "Senha2".
+-  :lock: Schedule a batch to encode data from field "senha1" to "senha2" (Table senhas).
+-  :lock: Schedule a batch to encode data from field "cpf" to "cpf" (Table pessoas).
 - :page_facing_up: List all passwords
 
 ## Tech
@@ -18,5 +19,9 @@
 ## Installation
 
 Requires java 8 to run.
+
+Change the profile on application.yaml 
+ - `senhas`:  Run on table senhas.
+ - `pessoas`: Run on table pessoas.
 
 Right click -> Run as... -> Spring Boot App.
