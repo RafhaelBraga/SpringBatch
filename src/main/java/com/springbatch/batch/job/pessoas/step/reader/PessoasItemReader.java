@@ -23,7 +23,7 @@ public class PessoasItemReader {
       return new JdbcCursorItemReaderBuilder<Pessoas>()
         .name("pessoasItemReader")
         .dataSource(dataSource)
-        .sql("select * from pessoas")
+        .sql("select * from pessoas where id > (select ultimo_id from parametros where tabela = 'pessoas')")
         .rowMapper(new BeanPropertyRowMapper<>(Pessoas.class))
         .maxRows(maxRows)
         .build();
