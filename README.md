@@ -8,6 +8,7 @@
 
 -  :lock: Schedule a batch to encode data from field "senha1" to "senha2" (Table senhas).
 -  :lock: Schedule a batch to encode data from field "cpf" to "cpf" (Table pessoas).
+-  :bricks: With the CompositeItemWriter, "PessoasCpfEncryptJob" can be broken down into runs.
 - :page_facing_up: List all passwords.
 
 ## Tech
