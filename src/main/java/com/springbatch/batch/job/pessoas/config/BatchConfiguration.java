@@ -7,6 +7,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
+import org.springframework.batch.item.support.CompositeItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,8 +27,8 @@ import com.springbatch.entity.Pessoas;
 public class BatchConfiguration {
 
     @Autowired
-    @Qualifier(value = "PessoasJdbcBatchItemWriter")
-    JdbcBatchItemWriter<Pessoas> writer;
+    @Qualifier(value = "CustomItemWriter")
+    CompositeItemWriter<Pessoas> customItemWriter;
 
     @Value("${chunk}")
     private int chunk;
@@ -72,7 +73,7 @@ public class BatchConfiguration {
         .listener(pessoasItemReaderListener)
         .processor(processor())
         .listener(pessoasItemProcessorListener)
-        .writer(writer)
+        .writer(customItemWriter)
         .listener(pessoasItemWriterListener)
         .build();
     }
