@@ -1,4 +1,4 @@
-package com.springbatch.batch.job.pessoas.step.writer;
+package com.springbatch.batch.job.pessoas.listener.writer;
 
 import java.util.List;
 
@@ -8,14 +8,14 @@ import org.springframework.batch.core.ItemWriteListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.springbatch.batch.job.pessoas.config.PessoasJobCompletionNotificationListener;
+import com.springbatch.batch.job.pessoas.listener.PessoasJobListener;
 import com.springbatch.entity.Pessoas;
 
 @Profile("pessoas")
 @Component
 public class PessoasItemWriterListener implements ItemWriteListener<Pessoas>{
 
-	private static final Logger log = LoggerFactory.getLogger(PessoasJobCompletionNotificationListener.class);
+	private static final Logger log = LoggerFactory.getLogger(PessoasJobListener.class);
 	
 	@Override
 	public void beforeWrite(List<? extends Pessoas> items) {

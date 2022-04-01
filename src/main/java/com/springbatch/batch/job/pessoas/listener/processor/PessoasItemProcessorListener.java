@@ -1,4 +1,4 @@
-package com.springbatch.batch.job.pessoas.step.processor;
+package com.springbatch.batch.job.pessoas.listener.processor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,14 +6,14 @@ import org.springframework.batch.core.ItemProcessListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.springbatch.batch.job.pessoas.config.PessoasJobCompletionNotificationListener;
+import com.springbatch.batch.job.pessoas.listener.PessoasJobListener;
 import com.springbatch.entity.Pessoas;
 
 @Profile("pessoas")
 @Component
 public class PessoasItemProcessorListener implements ItemProcessListener<Pessoas, Pessoas>{
 	
-	private static final Logger log = LoggerFactory.getLogger(PessoasJobCompletionNotificationListener.class);
+	private static final Logger log = LoggerFactory.getLogger(PessoasJobListener.class);
 
 	@Override
 	public void beforeProcess(Pessoas item) {

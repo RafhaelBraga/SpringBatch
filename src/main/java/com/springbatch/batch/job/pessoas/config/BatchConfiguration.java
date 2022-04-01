@@ -15,10 +15,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.springbatch.batch.job.pessoas.listener.PessoasJobListener;
+import com.springbatch.batch.job.pessoas.listener.processor.PessoasItemProcessorListener;
+import com.springbatch.batch.job.pessoas.listener.reader.PessoasItemReaderListener;
+import com.springbatch.batch.job.pessoas.listener.writer.PessoasItemWriterListener;
 import com.springbatch.batch.job.pessoas.step.processor.PessoasItemProcessor;
-import com.springbatch.batch.job.pessoas.step.processor.PessoasItemProcessorListener;
-import com.springbatch.batch.job.pessoas.step.reader.PessoasItemReaderListener;
-import com.springbatch.batch.job.pessoas.step.writer.PessoasItemWriterListener;
 import com.springbatch.entity.Pessoas;
 
 @Configuration
@@ -26,12 +27,12 @@ import com.springbatch.entity.Pessoas;
 @Profile("pessoas")
 public class BatchConfiguration {
 
+    @Value("${chunk}")
+    private int chunk;
+
     @Autowired
     @Qualifier(value = "CustomItemWriter")
     CompositeItemWriter<Pessoas> customItemWriter;
-
-    @Value("${chunk}")
-    private int chunk;
     
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -58,8 +59,8 @@ public class BatchConfiguration {
     }
     
     @Bean
-    public Job ChangeCryptJob(PessoasJobCompletionNotificationListener listener, Step step1) {
-      return jobBuilderFactory.get("ChangeCpfEncryptJob")
+    public Job ChangeCryptJob(PessoasJobListener listener, Step step1) {
+      return jobBuilderFactory.get("PessoasCpfEncryptJob")
         .start(step1)
         .listener(listener)
         .build();

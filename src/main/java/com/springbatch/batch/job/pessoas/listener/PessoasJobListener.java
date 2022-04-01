@@ -1,4 +1,4 @@
-package com.springbatch.batch.job.pessoas.config;
+package com.springbatch.batch.job.pessoas.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,21 +14,21 @@ import com.springbatch.entity.Pessoas;
 
 @Component
 @Profile("pessoas")
-public class PessoasJobCompletionNotificationListener extends JobExecutionListenerSupport {
+public class PessoasJobListener extends JobExecutionListenerSupport {
 	
-	private static final Logger log = LoggerFactory.getLogger(PessoasJobCompletionNotificationListener.class);
+	private static final Logger log = LoggerFactory.getLogger(PessoasJobListener.class);
 	
 	private final JdbcTemplate jdbcTemplate;
 
 	  @Autowired
-	  public PessoasJobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
+	  public PessoasJobListener(JdbcTemplate jdbcTemplate) {
 	    this.jdbcTemplate = jdbcTemplate;
 	  }
 	  
 	  @Override
 	  public void afterJob(JobExecution jobExecution) {
 	    if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
-	      log.info("!!! JOB FINISHED! Time to verify the results");
+	      log.info("------------------ JOB FINISHED ------------------");
 
 	      jdbcTemplate.query("SELECT * FROM pessoas",
 	        (rs, row) -> new Pessoas(
@@ -36,6 +36,11 @@ public class PessoasJobCompletionNotificationListener extends JobExecutionListen
 	          rs.getString(2))
 	      ).forEach(pessoa -> log.info("Found <" + pessoa + "> in the database."));
 	    }
+	  }
+	  
+	  @Override
+	  public void beforeJob(JobExecution jobExecution) {
+	      log.info("------------------ STARTING JOB ------------------");
 	  }
 
 }
